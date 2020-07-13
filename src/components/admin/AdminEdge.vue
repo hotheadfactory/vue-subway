@@ -39,11 +39,11 @@
           <div class="w-full h-full">
             <tiny-slider
               v-bind="tnsOptions"
-              v-if="lineStations.length > 0"
+              v-if="$store.state.lineStations.length > 0"
               class="subway-lines-slider"
             >
               <div
-                v-for="line in lineStations"
+                v-for="line in $store.state.lineStations"
                 v-bind:key="line.id"
                 class="inline-block w-1/2 px-2"
               >
@@ -101,7 +101,7 @@
                   class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                 >
                   <option
-                    v-for="line in lineStations"
+                    v-for="line in $store.state.lineStations"
                     v-bind:key="line.id"
                     :data-id="line.id"
                     >{{ line.name }}</option
@@ -223,7 +223,6 @@ export default {
   },
   data() {
     return {
-      lineStations: [],
       modalVisible: false,
       lineName: null,
       lineID: null,
@@ -253,22 +252,24 @@ export default {
   methods: {
     getLineStations() {
       api.line.get().then((data) => {
-        this.lineStations = data;
+        this.$store.state.lineStations = data;
       });
     },
     async addLineStation() {
       event.preventDefault();
-      const stations = await api.station.get();
-      this.preStation = stations.find(
+      this.$store.state.stations = await api.station.get();
+      this.preStation = this.$store.state.stations.find(
         (station) => station.name === this.departStationName
       );
-      this.station = stations.find(
+      this.station = this.$store.state.stations.find(
         (station) => station.name === this.arrivalStationName
       );
       console.log(this.station);
       api.lineStation
         .create(
-          this.lineStations.find((line) => line.name === this.lineName).id,
+          this.$store.state.lineStations.find(
+            (line) => line.name === this.lineName
+          ).id,
           {
             preStationId: this.preStation ? this.preStation.id : null,
             stationId: this.station ? this.station.id : null,

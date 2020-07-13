@@ -51,7 +51,7 @@
         <div class="mt-5 flex subway-lines-container relative overflow-y-auto">
           <div id="subway-line-list" class="w-full">
             <div
-              v-for="line in lines"
+              v-for="line in $store.state.lines"
               v-bind:key="line.id"
               class="subway-line-item border border-gray-200 py-2 px-4 text-gray-800"
               :data-id="line.id"
@@ -206,7 +206,6 @@ export default {
     return {
       colorOptions: subwayLineColorOptions,
       modalVisible: false,
-      lines: [],
       color: null,
       subwayLineName: null,
       firstTime: null,
@@ -241,7 +240,7 @@ export default {
           alert(data.error);
           return;
         }
-        this.lines = data;
+        this.$store.state.lines = data;
       });
     },
     addLine() {
@@ -258,7 +257,7 @@ export default {
           alert(data.error);
           return;
         }
-        this.lines.push(data);
+        this.$store.state.lines.push(data);
         this.closeModal();
       });
     },

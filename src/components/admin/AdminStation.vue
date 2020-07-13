@@ -24,7 +24,7 @@
       <div class="mt-5 flex station-list-container relative overflow-y-auto">
         <div id="station-list" class="w-full">
           <div
-            v-for="value in stations"
+            v-for="value in $store.state.stations"
             v-bind:key="value.id"
             class="list-item border border-gray-200 py-2 px-4 text-gray-800"
             :data-id="value.id"
@@ -53,7 +53,6 @@ export default {
   data() {
     return {
       stationName: null,
-      stations: [],
     };
   },
   mounted() {
@@ -62,7 +61,7 @@ export default {
   methods: {
     getStations() {
       api.station.get().then((data) => {
-        this.stations = data;
+        this.$store.state.stations = data;
       });
     },
     addStation() {
@@ -88,14 +87,14 @@ export default {
         return;
       }
       api.station.create(station).then((data) => {
-        this.stations.push(data);
+        this.$store.state.stations.push(data);
       });
       this.stationName = null;
     },
     validateReduplication() {
       let isReduplicate = false;
 
-      this.stations.forEach((item) => {
+      this.$store.state.stations.forEach((item) => {
         if (item.name === this.stationName) {
           isReduplicate = true;
           return;
@@ -112,7 +111,10 @@ export default {
       }
 
       api.station.delete(value.id).then(() => {
-        this.stations.splice(this.stations.indexOf(value), 1);
+        this.$store.state.stations.splice(
+          this.$store.state.stations.indexOf(value),
+          1
+        );
       });
     },
   },
