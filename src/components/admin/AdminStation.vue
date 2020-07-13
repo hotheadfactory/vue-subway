@@ -16,7 +16,9 @@
             v-on:click="addStation"
             id="station-add-btn"
             class="inline-block text-sm bg-yellow-500 hover:bg-yellow-400 hover:text-gray-700 text-gray-800 font-bold py-2 px-4 rounded"
-          >추가</button>
+          >
+            추가
+          </button>
         </div>
       </form>
       <div class="mt-5 flex station-list-container relative overflow-y-auto">
@@ -27,7 +29,7 @@
             class="list-item border border-gray-200 py-2 px-4 text-gray-800"
             :data-id="value.id"
           >
-            {{value.name}}
+            {{ value.name }}
             <button
               v-on:click="deleteStation(value)"
               class="hover:bg-gray-300 hover:text-gray-500 text-gray-300 px-1 rounded-full float-right"
@@ -44,14 +46,14 @@
 <script>
 import {
   CONFIRM_MESSAGE,
-  ERROR_MESSAGE
-} from "../../public/utils/constants.js";
-import api from "../../public/api";
+  ERROR_MESSAGE,
+} from "../../../public/admin/utils/constants.js";
+import api from "../../../public/admin/api";
 export default {
   data() {
     return {
       stationName: null,
-      stations: []
+      stations: [],
     };
   },
   mounted() {
@@ -59,14 +61,14 @@ export default {
   },
   methods: {
     getStations() {
-      api.station.get().then(data => {
+      api.station.get().then((data) => {
         this.stations = data;
       });
     },
     addStation() {
       const regExp = new RegExp(/^[^\d\s]+$/);
       const station = {
-        name: this.stationName
+        name: this.stationName,
       };
       if (event) event.preventDefault();
       if (!this.stationName) {
@@ -85,7 +87,7 @@ export default {
         this.stationName = null;
         return;
       }
-      api.station.create(station).then(data => {
+      api.station.create(station).then((data) => {
         this.stations.push(data);
       });
       this.stationName = null;
@@ -93,7 +95,7 @@ export default {
     validateReduplication() {
       let isReduplicate = false;
 
-      this.stations.forEach(item => {
+      this.stations.forEach((item) => {
         if (item.name === this.stationName) {
           isReduplicate = true;
           return;
@@ -112,11 +114,11 @@ export default {
       api.station.delete(value.id).then(() => {
         this.stations.splice(this.stations.indexOf(value), 1);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-@import "../../public/css/admin-station.css";
+@import "../../../public/admin/css/admin-station.css";
 </style>

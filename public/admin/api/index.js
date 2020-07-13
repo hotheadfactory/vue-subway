@@ -1,86 +1,90 @@
+const BASE_URL = "http://localhost:8080";
+
 const METHOD = {
   PUT(data) {
     return {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...data
-      })
-    }
+      body: JSON.stringify(data),
+    };
   },
   DELETE() {
     return {
-      method: 'DELETE'
-    }
+      method: "DELETE",
+    };
   },
   POST(data) {
     return {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...data
-      })
-    }
-  }
-}
+      body: JSON.stringify(data),
+    };
+  },
+};
 
 const api = (() => {
-  const request = (uri, config) => fetch(uri, config)
-  const requestWithJsonData = (uri, config) => fetch(uri, config).then(data => data.json())
+  const request = (uri, config) => fetch(uri, config);
 
   const station = {
-    get(id) {
-      return requestWithJsonData(`/stations/${id}`)
-    },
-    getAll() {
-      return requestWithJsonData(`/stations`)
+    get() {
+      return request(`${BASE_URL}/stations`).then((data) => data.json());
     },
     create(data) {
-      return requestWithJsonData(`/stations`, METHOD.POST(data))
-    },
-    update(data, id) {
-      return requestWithJsonData(`/stations/${id}`, METHOD.PUT(data))
+      return request(`${BASE_URL}/stations`, METHOD.POST(data)).then((data) =>
+        data.json()
+      );
     },
     delete(id) {
-      return request(`/stations/${id}`, METHOD.DELETE())
-    }
-  }
+      return request(`${BASE_URL}/stations/${id}`, METHOD.DELETE());
+    },
+  };
 
   const line = {
-    get(id) {
-      return requestWithJsonData(`/lines/${id}`)
+    get() {
+      return request(`${BASE_URL}/lines`).then((data) => data.json());
     },
-    getAll() {
-      return requestWithJsonData(`/lines`)
-    },
-    getAllDetail() {
-      return requestWithJsonData(`/lines/detail`)
-    },
-    addLineStation(lineId, lineStationCreateRequestView) {
-      return request(`/lines/${lineId}/stations`, METHOD.POST(lineStationCreateRequestView))
+    find(id) {
+      return request(`${BASE_URL}/lines/${id}`).then((data) => data.json());
     },
     create(data) {
-      return requestWithJsonData(`/lines`, METHOD.POST(data))
+      return request(`${BASE_URL}/lines`, METHOD.POST(data)).then((data) =>
+        data.json()
+      );
     },
     update(id, data) {
-      return request(`/lines/${id}`, METHOD.PUT(data))
-    },
-    deleteLineStation(lineId, stationId) {
-      return request(`/lines/${lineId}/stations/${stationId}`, METHOD.DELETE())
+      return request(`${BASE_URL}/lines/${id}`, METHOD.PUT(data)).then((data) =>
+        data.json()
+      );
     },
     delete(id) {
-      return request(`/lines/${id}`, METHOD.DELETE())
-    }
-  }
+      return request(`${BASE_URL}/lines/${id}`, METHOD.DELETE());
+    },
+  };
+
+  const lineStation = {
+    create(id, data) {
+      return request(
+        `${BASE_URL}/lines/${id}/stations`,
+        METHOD.PUT(data)
+      ).then((data) => data.json());
+    },
+    delete(lineId, stationId) {
+      return request(
+        `${BASE_URL}/lines/${lineId}/stations/${stationId}`,
+        METHOD.DELETE()
+      );
+    },
+  };
 
   return {
     station,
-    line
-  }
-})()
+    line,
+    lineStation,
+  };
+})();
 
-export default api
+export default api;

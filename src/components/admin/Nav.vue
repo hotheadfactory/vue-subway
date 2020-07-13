@@ -2,7 +2,7 @@
   <nav class="flex items-center justify-between flex-wrap bg-yellow-500 p-4">
     <div class="flex items-center flex-shrink-0 text-gray-800 w-full">
       <a href="/" class="mr-2">
-        <img src="../assets/logo_small.png" class="w-6" />
+        <img src="../../assets/logo_small.png" class="w-6" />
       </a>
       <div class="flex justify-start">
         <div class="hover:bg-yellow-400 px-2 py-1 rounded">

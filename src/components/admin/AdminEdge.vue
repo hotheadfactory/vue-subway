@@ -214,7 +214,7 @@
 </template>
 
 <script>
-import api from "../../public/api";
+import api from "../../../public/admin/api";
 import tns from "vue-tiny-slider";
 
 export default {
@@ -294,6 +294,6 @@ export default {
 </script>
 
 <style>
-@import "../../public/css/admin-edge.css";
-@import "../../public/lib/slider/tiny-slider.css";
+@import "../../../public/admin/css/admin-edge.css";
+@import "../../../public/admin/lib/slider/tiny-slider.css";
 </style>

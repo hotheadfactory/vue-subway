@@ -3,7 +3,9 @@
     <div class="flex justify-center md:py-10 lg:py-10 app-container">
       <div class="max-w-md width-450px rounded bg-white shadow-lg p-6">
         <div>
-          <div class="font-bold text-xl mb-4 relative w-full flex items-stretch">
+          <div
+            class="font-bold text-xl mb-4 relative w-full flex items-stretch"
+          >
             <div class="flex-1"></div>
             <div class="flex-1 text-center">노선 관리</div>
             <div class="flex-1 flex justify-end">
@@ -11,16 +13,39 @@
                 v-on:click="showModal"
                 id="subway-line-add-btn"
                 class="modal-open bg-transparent bg-yellow-500 hover:bg-yellow-400 hover:text-gray-700 text-gray-800 text-sm px-3 py-1 rounded"
-              >노선 추가</button>
+              >
+                노선 추가
+              </button>
             </div>
           </div>
           <div class="lines-info flex flex-wrap mb-3 w-full">
-            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-200">첫차 시간</div>
-            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-100" id="start-time-view">--:--</div>
-            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-200">막차 시간</div>
-            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-100" id="end-time-view">--:--</div>
-            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-200">간격</div>
-            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-100" id="interval-time-view">-</div>
+            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-200">
+              첫차 시간
+            </div>
+            <div
+              class="w-1/2 p-2 text-center text-gray-800 bg-gray-100"
+              id="start-time-view"
+            >
+              --:--
+            </div>
+            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-200">
+              막차 시간
+            </div>
+            <div
+              class="w-1/2 p-2 text-center text-gray-800 bg-gray-100"
+              id="end-time-view"
+            >
+              --:--
+            </div>
+            <div class="w-1/2 p-2 text-center text-gray-800 bg-gray-200">
+              간격
+            </div>
+            <div
+              class="w-1/2 p-2 text-center text-gray-800 bg-gray-100"
+              id="interval-time-view"
+            >
+              -
+            </div>
           </div>
         </div>
         <div class="mt-5 flex subway-lines-container relative overflow-y-auto">
@@ -31,7 +56,10 @@
               class="subway-line-item border border-gray-200 py-2 px-4 text-gray-800"
               :data-id="line.id"
             >
-              <span class="w-3 h-3 rounded-full inline-block mr-1" :class="line.color"></span>
+              <span
+                class="w-3 h-3 rounded-full inline-block mr-1"
+                :class="line.color"
+              ></span>
               <span id="line-name">{{ line.name }}</span>
               <button
                 class="hover:bg-gray-300 hover:text-gray-500 text-gray-300 px-1 rounded-full float-right"
@@ -52,7 +80,9 @@
       v-if="modalVisible"
       class="modal modal-active fixed w-full h-full top-0 left-0 flex items-center justify-center"
     >
-      <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+      <div
+        class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+      ></div>
       <div
         class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto"
       >
@@ -62,7 +92,11 @@
           </div>
           <div id="subway-line-create-form" class="mb-4">
             <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="subway-line-name">노선 이름</label>
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="subway-line-name"
+                >노선 이름</label
+              >
               <input
                 v-model="subwayLineName"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -74,7 +108,11 @@
 
             <div class="flex mb-4">
               <div class="w-1/3 pr-2">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="first-time">첫차 시간</label>
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="first-time"
+                  >첫차 시간</label
+                >
                 <input
                   v-model="firstTime"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -84,7 +122,11 @@
                 />
               </div>
               <div class="w-1/3 pr-2">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="last-time">막차 시간</label>
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="last-time"
+                  >막차 시간</label
+                >
                 <input
                   v-model="lastTime"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -95,7 +137,11 @@
               </div>
 
               <div class="w-1/3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="interval-time">간격</label>
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="interval-time"
+                  >간격</label
+                >
                 <input
                   v-model="intervalTime"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -110,7 +156,8 @@
               <label
                 class="block text-gray-700 text-sm font-bold mb-2"
                 for="subway-line-color"
-              >노선 색상</label>
+                >노선 색상</label
+              >
               <input
                 v-model="color"
                 placeholder="색상을 선택해주세요"
@@ -133,11 +180,15 @@
               <button
                 v-on:click="closeModal"
                 class="modal-close px-4 bg-transparent p-3 rounded text-gray-600 hover:bg-gray-100 hover:text-gray-700 mr-2 text-sm"
-              >취소</button>
+              >
+                취소
+              </button>
               <button
                 v-on:click="addLine"
                 class="px-4 bg-yellow-500 hover:bg-yellow-400 hover:text-gray-700 text-gray-800 rounded text-white text-sm"
-              >확인</button>
+              >
+                확인
+              </button>
             </div>
           </div>
         </div>
@@ -147,8 +198,8 @@
 </template>
 
 <script>
-import api from "../../public/api";
-import { subwayLineColorOptions } from "../../public/utils/defaultSubwayData.js";
+import api from "../../../public/admin/api";
+import { subwayLineColorOptions } from "../../../public/admin/utils/defaultSubwayData.js";
 
 export default {
   data() {
@@ -160,7 +211,7 @@ export default {
       subwayLineName: null,
       firstTime: null,
       lastTime: null,
-      intervalTime: null
+      intervalTime: null,
     };
   },
   mounted() {
@@ -185,7 +236,7 @@ export default {
       this.color = color;
     },
     getLines() {
-      api.line.get().then(data => {
+      api.line.get().then((data) => {
         if (data.error) {
           alert(data.error);
           return;
@@ -199,10 +250,10 @@ export default {
         startTime: this.firstTime,
         endTime: this.lastTime,
         intervalTime: this.intervalTime,
-        color: this.color
+        color: this.color,
       };
 
-      api.line.create(data).then(data => {
+      api.line.create(data).then((data) => {
         if (data.error) {
           alert(data.error);
           return;
@@ -210,11 +261,11 @@ export default {
         this.lines.push(data);
         this.closeModal();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-@import "../../public/css/admin-line.css";
+@import "../../../public/admin/css/admin-line.css";
 </style>

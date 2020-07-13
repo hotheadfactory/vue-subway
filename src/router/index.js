@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Index from "../components/Index.vue";
-import AdminStation from "../components/AdminStation.vue";
-import AdminLine from "../components/AdminLine.vue";
-import AdminEdge from "../components/AdminEdge.vue";
+import Index from "../components/admin/Index.vue";
+import AdminStation from "../components/admin/AdminStation.vue";
+import AdminLine from "../components/admin/AdminLine.vue";
+import AdminEdge from "../components/admin/AdminEdge.vue";
 
 Vue.use(VueRouter);
 
