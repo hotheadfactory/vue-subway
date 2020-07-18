@@ -13,12 +13,10 @@
             placeholder="역 이름을 추가해주세요."
           />
           <button
-            v-on:click="addStation"
+            @click.prevent="addStation"
             id="station-add-btn"
             class="inline-block text-sm bg-yellow-500 hover:bg-yellow-400 hover:text-gray-700 text-gray-800 font-bold py-2 px-4 rounded"
-          >
-            추가
-          </button>
+          >추가</button>
         </div>
       </form>
       <div class="mt-5 flex station-list-container relative overflow-y-auto">
@@ -46,30 +44,24 @@
 <script>
 import {
   CONFIRM_MESSAGE,
-  ERROR_MESSAGE,
+  ERROR_MESSAGE
 } from "../../../public/admin/utils/constants.js";
 import api from "../../../public/admin/api";
 export default {
   data() {
     return {
-      stationName: null,
+      stationName: null
     };
   },
   mounted() {
-    this.getStations();
+    this.$store.commit("getStations");
   },
   methods: {
-    getStations() {
-      api.station.get().then((data) => {
-        this.$store.state.stations = data;
-      });
-    },
     addStation() {
       const regExp = new RegExp(/^[^\d\s]+$/);
       const station = {
-        name: this.stationName,
+        name: this.stationName
       };
-      if (event) event.preventDefault();
       if (!this.stationName) {
         alert(ERROR_MESSAGE.NOT_EMPTY);
         return;
@@ -86,7 +78,7 @@ export default {
         this.stationName = null;
         return;
       }
-      api.station.create(station).then((data) => {
+      api.station.create(station).then(data => {
         this.$store.state.stations.push(data);
       });
       this.stationName = null;
@@ -94,7 +86,7 @@ export default {
     validateReduplication() {
       let isReduplicate = false;
 
-      this.$store.state.stations.forEach((item) => {
+      this.$store.state.stations.forEach(item => {
         if (item.name === this.stationName) {
           isReduplicate = true;
           return;
@@ -116,8 +108,8 @@ export default {
           1
         );
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

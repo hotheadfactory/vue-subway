@@ -66,7 +66,7 @@
             />
             <button
               v-for="data in colorOptions"
-              v-on:click="inputColor(data.bgColor)"
+              @click="inputColor(data.bgColor)"
               v-bind:key="data.color"
               :data-color="data.color"
               :class="[data.bgColor, data.hoverColor]"
@@ -76,11 +76,11 @@
 
           <div class="flex justify-end pt-4">
             <button
-              v-on:click="$store.commit('toggleModal')"
+              @click="$store.commit('toggleModal')"
               class="modal-close px-4 bg-transparent p-3 rounded text-gray-600 hover:bg-gray-100 hover:text-gray-700 mr-2 text-sm"
             >취소</button>
             <button
-              v-on:click="addLine"
+              @click="addLine"
               class="px-4 bg-yellow-500 hover:bg-yellow-400 hover:text-gray-700 text-gray-800 rounded text-white text-sm"
             >확인</button>
           </div>
